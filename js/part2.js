@@ -1,24 +1,23 @@
 function ConversionPart2() {
     //
-    var SignedDecimalInt = parseInt(document.getElementById("2_SignedInt").value);
-    output = "";
-    while (SignedDecimalInt >0)
+    var SignedDecimalInt = document.getElementById("2_SignedInt").value;
+    var neg = false
+    if (SignedDecimalInt<0)
     {
-      output = output= SignedDecimalInt%2;
-      SignedDecimalInt = SignedDecimalInt/2;
+      neg = true;
+      SignedDecimalInt = SignedDecimalInt.substring (1);
     }
-    if (SignedDecimalInt>=0)
+    outputValue = "";
+    while (SignedDecimalInt!=0)
     {
-      output += "0";
+      outputValue = SignedDecimalInt % 2 + outputValue;
+      SignedDecimalInt = Math.trunc(SignedDecimalInt / 2);
     }
-    else {
-      output +="1";
-    }
-    outputValueTwosComplement ="";
-
+    var length = outputValue.length;
+    var outputValueTwosComplement= "";
     for (var i = 0; i<length;i++)
     {
-      var num=output.charAt(i)
+      var num=outputValue.charAt(i)
         if (num==1)
         {
           outputValueTwosComplement+=""+0;
@@ -28,8 +27,35 @@ function ConversionPart2() {
           outputValueTwosComplement+=""+1;
         }
     }
-    var final = output;
+    var carry = false
+    var intArray = outputValueTwosComplement.split("");
+    var twosFinalOutput = "";
+    if (intArray[outputValue.length-1]=="0")
+    {
+      intArray[outputValue.length-1] = "1";
+      for (var i = 0; i<intArray.length-1; i++)
+      {
+        twosFinalOutput +=intArray[i];
+      }
+    }
+    else {
+      carry = true
+      for (var c = 0; c<intArray.length-1; c++){
+        if (carry == true && intArray[c]==1){
+          intArray[c] = 0;
+        }
+        else if (carry==true && intArray[c]==0){
+          intArray[c]=1;
+          carry = false;
+        }
+      }
+      for (var i = 0; i<intArray.length-1; i++)
+      {
+        twosFinalOutput +=intArray[i];
+      }
+    }
 
     // Show the output on the screen
-    FormatAndShowOutput([final, outputValueTwosComplement, SignedDecimalInt], 2);
+    FormatAndShowOutput([outputValue, twosFinalOutput, SignedDecimalInt], 2);
+
 }
