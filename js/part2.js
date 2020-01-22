@@ -1,6 +1,7 @@
 function ConversionPart2() {
     //
     var SignedDecimalInt = document.getElementById("2_SignedInt").value;
+    var substitute = document.getElementById("2_SignedInt").value;
     var neg = false
     if (SignedDecimalInt<0)
     {
@@ -8,11 +9,12 @@ function ConversionPart2() {
       SignedDecimalInt = SignedDecimalInt.substring (1);
     }
     outputValue = "";
-    while (SignedDecimalInt!=0)
+    while (SignedDecimalInt>=2)
     {
       outputValue = SignedDecimalInt % 2 + outputValue;
       SignedDecimalInt = Math.trunc(SignedDecimalInt / 2);
     }
+    outputValue= + "" + SignedDecimalInt+outputValue;
     var length = outputValue.length;
     var outputValueTwosComplement= "";
     for (var i = 0; i<length;i++)
@@ -33,14 +35,14 @@ function ConversionPart2() {
     if (intArray[outputValue.length-1]=="0")
     {
       intArray[outputValue.length-1] = "1";
-      for (var i = 0; i<intArray.length-1; i++)
+      for (var i = 0; i<intArray.length; i++)
       {
         twosFinalOutput +=intArray[i];
       }
     }
     else {
       carry = true
-      for (var c = 0; c<intArray.length-1; c++){
+      for (var c = 0; c<intArray.length; c++){
         if (carry == true && intArray[c]==1){
           intArray[c] = 0;
         }
@@ -56,6 +58,6 @@ function ConversionPart2() {
     }
 
     // Show the output on the screen
-    FormatAndShowOutput([outputValue, twosFinalOutput, SignedDecimalInt], 2);
+    FormatAndShowOutput([outputValue, twosFinalOutput, substitute], 2);
 
 }
