@@ -2,6 +2,21 @@
 function ConversionPart3() {
   var floatToConvert = parseFloat(document.getElementById("3_Float").value);
 
+  var neg = false;
+  if (floatToConvert<0)
+  {
+    neg = true;
+    floatToConvert = floatToConvert*(-1);
+  }
+  var sign = 0;
+  if (neg == true)
+  {
+    sign = 1;
+  }
+
+  var truncated = Math.floor(floatToConvert);
+  var floatAsString = floatToConvert.toString();
+
   var decimal = "";
   var leftOfDecimal = "";
   var decimalplace = floatAsString.indexOf(".");
