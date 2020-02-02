@@ -56,7 +56,7 @@ function ConversionPart3() {
     }
   }
   var leftOfDecNoOne = leftOfDecimal.substring(1);
-  var numberInBinary = leftOfDecNoOne + "" + decimal;
+  var numberInBinary = leftOfDecNoOne.length + "" + decimal;
 
   var exponent = leftOfDecimal-1 +128;
   var binaryExponent = "";
@@ -69,13 +69,13 @@ function ConversionPart3() {
   {
     binaryExponent = exponent + ""+binaryExponent;
   }
-  output32BitScientificNotation = "" + binaryExponent + sign + numberInBinary;
 
-  while (output32BitScientificNotation.length<32)
+
+  while (numberInBinary.length<32)
   {
-    output32BitScientificNotation = output32BitScientificNotation+ "0";
+    numberInBinary = numberInBinary+ "0";
   }
-
+  output32BitScientificNotation = "" + numberInBinary+ binaryExponent + sign;
 
 
 
