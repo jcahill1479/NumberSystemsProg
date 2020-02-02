@@ -8,7 +8,7 @@ function ConversionPart2() {
       neg = true;
       SignedDecimalInt = SignedDecimalInt.substring (1);
     }
-    outputValue = "";
+    var outputValue = "";
     while (SignedDecimalInt>=2)
     {
       outputValue = SignedDecimalInt % 2 + outputValue;
@@ -20,7 +20,7 @@ function ConversionPart2() {
     for (var i = 0; i<length;i++)
     {
       var num=outputValue.charAt(i)
-        if (num==1)
+        if (num=="1")
         {
           outputValueTwosComplement+=""+0;
         }
@@ -28,6 +28,10 @@ function ConversionPart2() {
         {
           outputValueTwosComplement+=""+1;
         }
+    }
+    if (outputValueTwosComplement.length<outputValue.length)
+    {
+      outputValueTwosComplement = "0" + outputValueTwosComplement;
     }
     var carry = false
     var intArray = outputValueTwosComplement.split("");
@@ -56,8 +60,39 @@ function ConversionPart2() {
         twosFinalOutput +=intArray[i];
       }
     }
-
+    if (twosFinalOutput.length<outputValue.length)
+    {
+      twosFinalOutput = twosFinalOutput + "0";
+    }
+    if (neg ==true)
+    {
+      while (twosFinalOutput.length<32)
+      {
+        twosFinalOutput = "1" + twosFinalOutput;
+      }
+      while (outputValue.length< 32)
+      {
+        outputValue = "0" + outputValue;
+      }
+    }
+    else
+    {
+      while (twosFinalOutput.length<32)
+      {
+        twosFinalOutput = "1" + twosFinalOutput;
+      }
+      while (outputValue.length< 32)
+      {
+        outputValue = "0" + outputValue;
+      }
+    }
     // Show the output on the screen
-    FormatAndShowOutput([outputValue, twosFinalOutput, substitute], 2);
+    if (neg==true)
+    {
+      FormatAndShowOutput([twosFinalOutput, outputValue, substitute], 2);
+    }
+    else {
+      FormatAndShowOutput([outputValue, twosFinalOutput, substitute], 2);
 
+    }
 }
